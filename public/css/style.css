@@ -1,0 +1,57 @@
+/* public/css/style.css - custom UI tweaks */
+:root{
+  --brand:#0d6efd; /* bootstrap primary */
+  --muted:#6c757d;
+  --card-radius:12px;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f7f9fc;
+  color: #212529;
+}
+
+/* Header spacing */
+.app-header {
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 1px 0 rgba(16,24,40,0.02);
+}
+
+/* Small visual card style */
+.card.custom {
+  border-radius: var(--card-radius);
+  box-shadow: 0 6px 18px rgba(18,38,63,0.06);
+}
+
+/* Plan block card */
+.plan-block {
+  border-left: 4px solid var(--brand);
+}
+
+/* Small badges and spacing */
+.badge-subtle {
+  background: rgba(13,110,253,0.08);
+  color: var(--brand);
+  font-weight:600;
+}
+
+/* Secondary footer note */
+.small-muted { color: var(--muted); font-size:0.9rem; }
+
+/* Adjust form controls */
+.form-control, .btn {
+  border-radius: 8px;
+}
+
+/* Responsive grid gap */
+.row.gap-3 { row-gap: 1.1rem; column-gap: 1rem; }
+
+/* analytics progress bar bigger */
+.progress { height: 1.25rem; border-radius: 8px; }
+
+/* file input styling fallback */
+.custom-file {
+  display:inline-flex; align-items:center; gap:0.5rem;
+}

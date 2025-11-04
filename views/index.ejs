@@ -1,15 +1,50 @@
 <!doctype html>
-<html>
-<head><meta charset="utf-8"><title>ASSIS Demo</title></head>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Adaptive Study System — Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome (optional icons) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+</head>
 <body>
-  <h1>Adaptive Study System — Demo</h1>
-  <h3>Register (demo)</h3>
-  <form method="post" action="/register">
-    <input name="name" placeholder="Your name" required>
-    <input name="email" type="email" placeholder="email" required>
-    <button>Register</button>
-  </form>
-  <hr>
-  <p>Or open dashboard with existing userId query param: ?user=USER_ID</p>
+  <header class="app-header">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h4 class="mb-0">Adaptive Study System — Demo</h4>
+      <small class="text-muted">Quick demo</small>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card custom p-4">
+          <h5>Register (demo)</h5>
+          <p class="small-muted">Create a demo user quickly — no email verification.</p>
+          <form method="post" action="/register" class="row g-2">
+            <div class="col-md-6">
+              <input name="name" class="form-control" placeholder="Your name" required>
+            </div>
+            <div class="col-md-6">
+              <input name="email" type="email" class="form-control" placeholder="you@example.com" required>
+            </div>
+            <div class="col-12 mt-2">
+              <button class="btn btn-primary">Register</button>
+              <a href="#" class="btn btn-outline-secondary ms-2" onclick="document.querySelector('input[name=name]').value='Demo User';document.querySelector('input[name=email]').value='demo@example.com'; return false;">Fill demo</a>
+            </div>
+          </form>
+        </div>
+
+        <div class="text-center mt-4">
+          <small class="small-muted">Or open the dashboard directly with your user id: <code>?user=&lt;id&gt;</code></small>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

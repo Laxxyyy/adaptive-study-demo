@@ -1,76 +1,179 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Dashboard</title></head><body>
-<h2>Dashboard - <%= user.name %> (<%= user.id %>)</h2>
-<p><a href="/">Home</a> | <a href="/analytics?user=<%= user.id %>">Analytics</a></p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard - <%= user.name %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+  <header class="app-header">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div>
+        <h5 class="mb-0">Adaptive Study System</h5>
+        <small class="small-muted">Student: <strong><%= user.name %></strong></small>
+      </div>
+      <div>
+        <a class="btn btn-outline-secondary btn-sm" href="/">Home</a>
+        <a class="btn btn-outline-primary btn-sm" href="/analytics?user=<%= user.id %>">Analytics</a>
+      </div>
+    </div>
+  </header>
 
-<h3>Add Task</h3>
-<form method="post" action="/task">
-  <input name="title" placeholder="Task title" required>
-  <input name="subject" placeholder="Subject" required>
-  <input name="estMinutes" placeholder="Estimated minutes" type="number" required>
-  <input name="deadline" type="datetime-local" required>
-  <input type="hidden" name="userId" value="<%= user.id %>">
-  <button>Add Task</button>
-</form>
-
-<h3>Import .ics</h3>
-<form method="post" action="/import-ics" enctype="multipart/form-data">
-  <input type="file" name="icsfile" accept=".ics" required>
-  <input type="hidden" name="userId" value="<%= user.id %>">
-  <button>Upload</button>
-</form>
-
-<h3>Tasks</h3>
-<ul>
-  <% tasks.forEach(t=>{ %>
-    <li><strong><%= t.title %></strong> - <%= t.subject %> - <%= t.estMinutes %>min - due <%= new Date(t.deadline).toLocaleString() %></li>
-  <% }) %>
-</ul>
-
-<h3>Events (busy intervals)</h3>
-<ul>
-  <% events.forEach(e=>{ %>
-    <li><%= e.title %> — <%= new Date(e.start).toLocaleString() %> to <%= new Date(e.end).toLocaleString() %></li>
-  <% }) %>
-</ul>
-
-<h3>Plan</h3>
-<form method="post" action="/generate-plan">
-  <input type="hidden" name="userId" value="<%= user.id %>">
-  <label>Horizon days: <input name="horizon" type="number" value="7"></label>
-  <button>Generate Plan</button>
-</form>
-
-<ul>
-  <% plans.forEach(p=>{ %>
-    <li>Plan <%= p.id %> (blocks: <%= p.blocks.length %>)</li>
-    <ul>
-      <% p.blocks.forEach(b=>{ %>
-        <li><%= b.title %> — <%= new Date(b.start).toLocaleString() %> to <%= new Date(b.end).toLocaleString() %>
-          <form style="display:inline" method="post" action="/session/start">
+  <main class="container my-4">
+    <div class="row g-3">
+      <!-- Left column: Task / Import / Tasks -->
+      <div class="col-lg-5">
+        <div class="card custom p-3 mb-3">
+          <h6>Add Task</h6>
+          <form method="post" action="/task" class="row g-2">
             <input type="hidden" name="userId" value="<%= user.id %>">
-            <input type="hidden" name="blockId" value="<%= b.id %>">
-            <button>Start</button>
+            <div class="col-12">
+              <input name="title" class="form-control" placeholder="Task title" required>
+            </div>
+            <div class="col-md-6">
+              <input name="subject" class="form-control" placeholder="Subject" required>
+            </div>
+            <div class="col-md-3">
+              <input name="estMinutes" class="form-control" type="number" placeholder="min" required>
+            </div>
+            <div class="col-md-3">
+              <input name="deadline" class="form-control" type="datetime-local" required>
+            </div>
+            <div class="col-12 mt-1">
+              <button class="btn btn-primary">Add Task</button>
+            </div>
           </form>
-        </li>
-      <% }) %>
-    </ul>
-  <% }) %>
-</ul>
+        </div>
 
-<h3>Sessions</h3>
-<ul>
-  <% sessions.forEach(s=>{ %>
-    <li>Session <%= s.id %> — <%= s.status %> — start: <%= s.start %> end: <%= s.end %>
-      <% if(s.status==='inprogress'){ %>
-        <form method="post" action="/session/end" style="display:inline">
-          <input type="hidden" name="sessionId" value="<%= s.id %>">
-          <input type="hidden" name="userId" value="<%= user.id %>">
-          Focus (1-5): <input name="focusScore" type="number" min="1" max="5">
-          <button>End</button>
-        </form>
-      <% } %>
-    </li>
-  <% }) %>
-</ul>
+        <div class="card custom p-3 mb-3">
+          <h6>Import .ics (calendar)</h6>
+          <form method="post" action="/import-ics" enctype="multipart/form-data" class="d-flex align-items-center gap-2">
+            <input type="file" name="icsfile" accept=".ics" class="form-control form-control-sm" required>
+            <input type="hidden" name="userId" value="<%= user.id %>">
+            <button class="btn btn-outline-primary btn-sm">Upload</button>
+          </form>
+          <small class="small-muted d-block mt-2">Upload .ics to mark busy intervals (optional).</small>
+        </div>
 
-</body></html>
+        <div class="card custom p-3">
+          <h6>Tasks</h6>
+          <% if(tasks.length===0){ %>
+            <div class="small-muted">No tasks yet.</div>
+          <% } else { %>
+            <ul class="list-group list-group-flush">
+              <% tasks.forEach(t=>{ %>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="fw-bold"><%= t.title %></div>
+                    <div class="small-muted"><%= t.subject %> • <%= t.estMinutes %> mins • due <%= new Date(t.deadline).toLocaleString() %></div>
+                  </div>
+                </li>
+              <% }) %>
+            </ul>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Right column: Events / Plan / Sessions -->
+      <div class="col-lg-7">
+        <div class="card custom p-3 mb-3">
+          <h6>Events (busy intervals)</h6>
+          <% if(events.length===0){ %>
+            <div class="small-muted">No calendar events imported.</div>
+          <% } else { %>
+            <ul class="list-unstyled mb-0">
+              <% events.forEach(e=>{ %>
+                <li class="mb-2">
+                  <span class="badge badge-subtle me-2"><i class="fa-regular fa-calendar"></i></span>
+                  <strong><%= e.title %></strong>
+                  <div class="small-muted"><%= new Date(e.start).toLocaleString() %> – <%= new Date(e.end).toLocaleString() %></div>
+                </li>
+              <% }) %>
+            </ul>
+          <% } %>
+        </div>
+
+        <div class="card custom p-3 mb-3">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">Plan</h6>
+            <form method="post" action="/generate-plan" class="d-flex align-items-center gap-2">
+              <input type="hidden" name="userId" value="<%= user.id %>">
+              <input name="horizon" value="7" type="number" class="form-control form-control-sm" style="width:80px;">
+              <button class="btn btn-primary btn-sm">Generate Plan</button>
+            </form>
+          </div>
+
+          <% if(plans.length===0){ %>
+            <div class="small-muted">No plan generated yet.</div>
+          <% } else { %>
+            <% plans.forEach(p=>{ %>
+              <div class="mt-2 mb-2">
+                <div class="small-muted">Plan created: <%= new Date(p.createdAt).toLocaleString() %> — Blocks: <%= p.blocks.length %></div>
+                <div class="row g-2 mt-2">
+                  <% p.blocks.forEach(b=>{ %>
+                    <div class="col-md-6">
+                      <div class="card plan-block p-2">
+                        <div class="d-flex justify-content-between">
+                          <div>
+                            <strong><%= b.title %></strong>
+                            <div class="small-muted"><%= b.subject %></div>
+                            <div class="small-muted"><%= new Date(b.start).toLocaleString() %> - <%= new Date(b.end).toLocaleString() %></div>
+                          </div>
+                          <div class="d-flex flex-column">
+                            <form method="post" action="/session/start">
+                              <input type="hidden" name="userId" value="<%= user.id %>">
+                              <input type="hidden" name="blockId" value="<%= b.id %>">
+                              <button class="btn btn-success btn-sm">Start</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% }) %>
+                </div>
+              </div>
+            <% }) %>
+          <% } %>
+        </div>
+
+        <div class="card custom p-3">
+          <h6>Sessions</h6>
+          <% if(sessions.length===0){ %>
+            <div class="small-muted">No sessions yet.</div>
+          <% } else { %>
+            <ul class="list-group">
+              <% sessions.forEach(s=>{ %>
+                <li class="list-group-item">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <strong>Session</strong> • <span class="small-muted"><%= s.status %></span>
+                      <div class="small-muted">Start: <%= s.start %> End: <%= s.end || '-' %></div>
+                    </div>
+                    <div>
+                      <% if(s.status==='inprogress'){ %>
+                        <form method="post" action="/session/end" class="d-flex gap-2">
+                          <input type="hidden" name="sessionId" value="<%= s.id %>">
+                          <input type="hidden" name="userId" value="<%= user.id %>">
+                          <input name="focusScore" type="number" min="1" max="5" class="form-control form-control-sm" style="width:70px;" placeholder="Focus">
+                          <button class="btn btn-primary btn-sm">End</button>
+                        </form>
+                      <% } %>
+                    </div>
+                  </div>
+                </li>
+              <% }) %>
+            </ul>
+          <% } %>
+        </div>
+
+      </div>
+    </div>
+    <div class="text-muted small mt-3">Tip: keep this dashboard open during demo to show plan and sessions.</div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

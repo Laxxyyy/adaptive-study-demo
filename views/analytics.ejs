@@ -1,7 +1,76 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Analytics</title></head><body>
-<h2>Analytics - <%= user.name %></h2>
-<p>Planned Blocks: <%= plannedBlocks %></p>
-<p>Completed Sessions: <%= completed %></p>
-<p>Adherence: <%= adherence %> %</p>
-<p><a href="/dashboard?user=<%= user.id %>">Back</a></p>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Analytics - <%= user.name %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div>
+        <h5 class="mb-0">Analytics</h5>
+        <small class="small-muted">User: <%= user.name %></small>
+      </div>
+      <div>
+        <a class="btn btn-outline-secondary btn-sm" href="/dashboard?user=<%= user.id %>">Back to Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container py-4">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card custom p-3">
+          <h6>Adherence</h6>
+          <p class="mb-1 small-muted">Planned Blocks: <strong><%= plannedBlocks %></strong></p>
+          <p class="mb-1 small-muted">Completed Sessions: <strong><%= completed %></strong></p>
+          <div class="progress mb-2">
+            <div class="progress-bar" role="progressbar" style="width: <%= adherence %>%;" aria-valuenow="<%= adherence %>" aria-valuemin="0" aria-valuemax="100"><%= adherence %>%</div>
+          </div>
+          <p class="small-muted">Adherence is the percentage of scheduled blocks that were completed by the student.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card custom p-3">
+          <h6>Focus Scores (Recent Sessions)</h6>
+          <canvas id="focusChart" height="150"></canvas>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // build focus array from passed sessions (we don't have sessions data here by default; backend can pass)
+    // For demo, create a simple dataset using completed number or fake values.
+    const labels = Array.from({length: Math.min(8, <%= completed %> || 5)}, (_,i) => 'S'+(i+1));
+    const focusData = labels.map((_,i)=> Math.floor(Math.random()*3)+3); // random demo data (3-5)
+    const ctx = document.getElementById('focusChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Focus (1-5)',
+          data: focusData,
+          borderRadius: 6,
+          barThickness: 20
+        }]
+      },
+      options: {
+        scales: {
+          y: { min: 0, max: 5 }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
