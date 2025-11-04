@@ -1,0 +1,76 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Dashboard</title></head><body>
+<h2>Dashboard - <%= user.name %> (<%= user.id %>)</h2>
+<p><a href="/">Home</a> | <a href="/analytics?user=<%= user.id %>">Analytics</a></p>
+
+<h3>Add Task</h3>
+<form method="post" action="/task">
+  <input name="title" placeholder="Task title" required>
+  <input name="subject" placeholder="Subject" required>
+  <input name="estMinutes" placeholder="Estimated minutes" type="number" required>
+  <input name="deadline" type="datetime-local" required>
+  <input type="hidden" name="userId" value="<%= user.id %>">
+  <button>Add Task</button>
+</form>
+
+<h3>Import .ics</h3>
+<form method="post" action="/import-ics" enctype="multipart/form-data">
+  <input type="file" name="icsfile" accept=".ics" required>
+  <input type="hidden" name="userId" value="<%= user.id %>">
+  <button>Upload</button>
+</form>
+
+<h3>Tasks</h3>
+<ul>
+  <% tasks.forEach(t=>{ %>
+    <li><strong><%= t.title %></strong> - <%= t.subject %> - <%= t.estMinutes %>min - due <%= new Date(t.deadline).toLocaleString() %></li>
+  <% }) %>
+</ul>
+
+<h3>Events (busy intervals)</h3>
+<ul>
+  <% events.forEach(e=>{ %>
+    <li><%= e.title %> — <%= new Date(e.start).toLocaleString() %> to <%= new Date(e.end).toLocaleString() %></li>
+  <% }) %>
+</ul>
+
+<h3>Plan</h3>
+<form method="post" action="/generate-plan">
+  <input type="hidden" name="userId" value="<%= user.id %>">
+  <label>Horizon days: <input name="horizon" type="number" value="7"></label>
+  <button>Generate Plan</button>
+</form>
+
+<ul>
+  <% plans.forEach(p=>{ %>
+    <li>Plan <%= p.id %> (blocks: <%= p.blocks.length %>)</li>
+    <ul>
+      <% p.blocks.forEach(b=>{ %>
+        <li><%= b.title %> — <%= new Date(b.start).toLocaleString() %> to <%= new Date(b.end).toLocaleString() %>
+          <form style="display:inline" method="post" action="/session/start">
+            <input type="hidden" name="userId" value="<%= user.id %>">
+            <input type="hidden" name="blockId" value="<%= b.id %>">
+            <button>Start</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  <% }) %>
+</ul>
+
+<h3>Sessions</h3>
+<ul>
+  <% sessions.forEach(s=>{ %>
+    <li>Session <%= s.id %> — <%= s.status %> — start: <%= s.start %> end: <%= s.end %>
+      <% if(s.status==='inprogress'){ %>
+        <form method="post" action="/session/end" style="display:inline">
+          <input type="hidden" name="sessionId" value="<%= s.id %>">
+          <input type="hidden" name="userId" value="<%= user.id %>">
+          Focus (1-5): <input name="focusScore" type="number" min="1" max="5">
+          <button>End</button>
+        </form>
+      <% } %>
+    </li>
+  <% }) %>
+</ul>
+
+</body></html>

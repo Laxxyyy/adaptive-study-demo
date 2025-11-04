@@ -1,0 +1,260 @@
+{
+  "users": [
+    {
+      "id": "1fe477cf-de14-4759-a6df-0f8f6deb97f3",
+      "name": "Lakshya",
+      "email": "you@example.com",
+      "preferences": {},
+      "createdAt": 1762165005991
+    },
+    {
+      "id": "161b4ba6-32e9-4f28-aa94-b3c28e6ee1a7",
+      "name": "Ananya",
+      "email": "mine@gmail.com",
+      "preferences": {},
+      "createdAt": 1762166232366
+    },
+    {
+      "id": "d7786f95-bd89-458f-bf28-e3e2a5f63cd8",
+      "name": "Ayush",
+      "email": "jxhycdiy@wbgdue",
+      "preferences": {},
+      "createdAt": 1762166647213
+    },
+    {
+      "id": "604a17f6-f85f-45a9-aea3-992a7c31e603",
+      "name": "Vikas",
+      "email": "eutdui@njwgtsjker",
+      "preferences": {},
+      "createdAt": 1762168810736
+    }
+  ],
+  "tasks": [
+    {
+      "id": "45833b76-b671-4c50-806d-b795b98df139",
+      "userId": "1fe477cf-de14-4759-a6df-0f8f6deb97f3",
+      "title": "Revise Maths",
+      "subject": "Maths",
+      "estMinutes": 120,
+      "deadline": "2025-11-04T10:30:00.000Z",
+      "createdAt": 1762165865265
+    },
+    {
+      "id": "de0eb4af-76d6-4a95-84b7-dcadd2d34e83",
+      "userId": "161b4ba6-32e9-4f28-aa94-b3c28e6ee1a7",
+      "title": "Study English",
+      "subject": "English",
+      "estMinutes": 180,
+      "deadline": "2025-11-06T08:00:00.000Z",
+      "createdAt": 1762166407710
+    },
+    {
+      "id": "6d729a6d-4a12-4379-85e6-113f23d12904",
+      "userId": "d7786f95-bd89-458f-bf28-e3e2a5f63cd8",
+      "title": "DSA Revision",
+      "subject": "DSA",
+      "estMinutes": 45,
+      "deadline": "2025-11-04T18:30:00.000Z",
+      "createdAt": 1762166714480
+    },
+    {
+      "id": "c7184c6d-557a-473a-980f-dcae35182500",
+      "userId": "604a17f6-f85f-45a9-aea3-992a7c31e603",
+      "title": "DSA",
+      "subject": "Engineering",
+      "estMinutes": 180,
+      "deadline": "2025-11-06T11:21:00.000Z",
+      "createdAt": 1762168878185
+    }
+  ],
+  "events": [],
+  "plans": [
+    {
+      "id": "c8485ab1-2996-47b2-beef-72f948a48058",
+      "userId": "1fe477cf-de14-4759-a6df-0f8f6deb97f3",
+      "createdAt": 1762165914462,
+      "horizonDays": 7,
+      "blocks": [
+        {
+          "id": "427e8e23-12b6-477f-9e86-de9d2f1a0dba",
+          "userId": "1fe477cf-de14-4759-a6df-0f8f6deb97f3",
+          "taskId": "45833b76-b671-4c50-806d-b795b98df139",
+          "title": "Revise Maths",
+          "subject": "Maths",
+          "start": "2025-11-03T10:31:54.462Z",
+          "end": "2025-11-03T11:21:54.462Z"
+        },
+        {
+          "id": "a5af47b0-5e83-4f36-a069-ea595d6d6ff1",
+          "userId": "1fe477cf-de14-4759-a6df-0f8f6deb97f3",
+          "taskId": "45833b76-b671-4c50-806d-b795b98df139",
+          "title": "Revise Maths",
+          "subject": "Maths",
+          "start": "2025-11-03T11:31:54.462Z",
+          "end": "2025-11-03T12:21:54.462Z"
+        },
+        {
+          "id": "985dcd88-2f14-48b9-a83e-d446513b373c",
+          "userId": "1fe477cf-de14-4759-a6df-0f8f6deb97f3",
+          "taskId": "45833b76-b671-4c50-806d-b795b98df139",
+          "title": "Revise Maths",
+          "subject": "Maths",
+          "start": "2025-11-03T12:31:54.462Z",
+          "end": "2025-11-03T13:21:54.462Z"
+        }
+      ]
+    },
+    {
+      "id": "b471afc1-ba5c-4772-96fe-16966c29b147",
+      "userId": "161b4ba6-32e9-4f28-aa94-b3c28e6ee1a7",
+      "createdAt": 1762166420023,
+      "horizonDays": 5,
+      "blocks": [
+        {
+          "id": "3f1b0109-07b2-477d-8492-1a46250d3f23",
+          "userId": "161b4ba6-32e9-4f28-aa94-b3c28e6ee1a7",
+          "taskId": "de0eb4af-76d6-4a95-84b7-dcadd2d34e83",
+          "title": "Study English",
+          "subject": "English",
+          "start": "2025-11-03T10:40:20.022Z",
+          "end": "2025-11-03T11:30:20.022Z"
+        },
+        {
+          "id": "0a201dc0-dddb-4336-b5dc-6708630e89d2",
+          "userId": "161b4ba6-32e9-4f28-aa94-b3c28e6ee1a7",
+          "taskId": "de0eb4af-76d6-4a95-84b7-dcadd2d34e83",
+          "title": "Study English",
+          "subject": "English",
+          "start": "2025-11-03T11:40:20.022Z",
+          "end": "2025-11-03T12:30:20.022Z"
+        },
+        {
+          "id": "fabb779e-0395-422c-83ed-53d512eb28ba",
+          "userId": "161b4ba6-32e9-4f28-aa94-b3c28e6ee1a7",
+          "taskId": "de0eb4af-76d6-4a95-84b7-dcadd2d34e83",
+          "title": "Study English",
+          "subject": "English",
+          "start": "2025-11-03T12:40:20.022Z",
+          "end": "2025-11-03T13:30:20.022Z"
+        },
+        {
+          "id": "a4e4d52a-4492-41b0-8ebe-2b0839953801",
+          "userId": "161b4ba6-32e9-4f28-aa94-b3c28e6ee1a7",
+          "taskId": "de0eb4af-76d6-4a95-84b7-dcadd2d34e83",
+          "title": "Study English",
+          "subject": "English",
+          "start": "2025-11-03T13:40:20.022Z",
+          "end": "2025-11-03T14:30:20.022Z"
+        }
+      ]
+    },
+    {
+      "id": "d33ccd07-f4ad-4cc7-89bd-7c9696ba36bb",
+      "userId": "d7786f95-bd89-458f-bf28-e3e2a5f63cd8",
+      "createdAt": 1762166740132,
+      "horizonDays": 4,
+      "blocks": [
+        {
+          "id": "7a646d05-0d39-4c2a-a858-e70489863ea9",
+          "userId": "d7786f95-bd89-458f-bf28-e3e2a5f63cd8",
+          "taskId": "6d729a6d-4a12-4379-85e6-113f23d12904",
+          "title": "DSA Revision",
+          "subject": "DSA",
+          "start": "2025-11-03T10:45:40.131Z",
+          "end": "2025-11-03T11:35:40.131Z"
+        }
+      ]
+    },
+    {
+      "id": "f456c2f0-ff7c-4fdb-ae20-3ffeac49119e",
+      "userId": "604a17f6-f85f-45a9-aea3-992a7c31e603",
+      "createdAt": 1762168896493,
+      "horizonDays": 5,
+      "blocks": [
+        {
+          "id": "e6772c80-70b3-4266-acae-1df7ba44b56a",
+          "userId": "604a17f6-f85f-45a9-aea3-992a7c31e603",
+          "taskId": "c7184c6d-557a-473a-980f-dcae35182500",
+          "title": "DSA",
+          "subject": "Engineering",
+          "start": "2025-11-03T11:21:36.493Z",
+          "end": "2025-11-03T12:11:36.493Z"
+        },
+        {
+          "id": "264276ce-9b03-490a-b32e-f78b3b4cc60d",
+          "userId": "604a17f6-f85f-45a9-aea3-992a7c31e603",
+          "taskId": "c7184c6d-557a-473a-980f-dcae35182500",
+          "title": "DSA",
+          "subject": "Engineering",
+          "start": "2025-11-03T12:21:36.493Z",
+          "end": "2025-11-03T13:11:36.493Z"
+        },
+        {
+          "id": "1d54d9a9-c4fa-4acf-840b-9e6fe0c970d2",
+          "userId": "604a17f6-f85f-45a9-aea3-992a7c31e603",
+          "taskId": "c7184c6d-557a-473a-980f-dcae35182500",
+          "title": "DSA",
+          "subject": "Engineering",
+          "start": "2025-11-03T13:21:36.493Z",
+          "end": "2025-11-03T14:11:36.493Z"
+        },
+        {
+          "id": "c2d14f00-61f1-4979-b379-bf46ec32b281",
+          "userId": "604a17f6-f85f-45a9-aea3-992a7c31e603",
+          "taskId": "c7184c6d-557a-473a-980f-dcae35182500",
+          "title": "DSA",
+          "subject": "Engineering",
+          "start": "2025-11-03T14:21:36.493Z",
+          "end": "2025-11-03T15:11:36.493Z"
+        }
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "id": "60b24bc7-921d-4b57-95a2-0006c384aea4",
+      "userId": "1fe477cf-de14-4759-a6df-0f8f6deb97f3",
+      "blockId": "427e8e23-12b6-477f-9e86-de9d2f1a0dba",
+      "start": "2025-11-03T10:32:16.497Z",
+      "end": "2025-11-03T10:32:33.455Z",
+      "status": "completed",
+      "focusScore": "4"
+    },
+    {
+      "id": "a5e301c3-c755-4c2d-a72e-6d507ec8fce3",
+      "userId": "1fe477cf-de14-4759-a6df-0f8f6deb97f3",
+      "blockId": "427e8e23-12b6-477f-9e86-de9d2f1a0dba",
+      "start": "2025-11-03T10:33:14.399Z",
+      "end": "2025-11-03T10:33:18.180Z",
+      "status": "completed",
+      "focusScore": "4"
+    },
+    {
+      "id": "4c7c4ac1-f03c-47d2-8c70-ab6610f0b8be",
+      "userId": "161b4ba6-32e9-4f28-aa94-b3c28e6ee1a7",
+      "blockId": "3f1b0109-07b2-477d-8492-1a46250d3f23",
+      "start": "2025-11-03T10:40:51.878Z",
+      "end": "2025-11-03T10:40:56.769Z",
+      "status": "completed",
+      "focusScore": "3"
+    },
+    {
+      "id": "569ea548-bff2-4b12-ad3a-230dd306e224",
+      "userId": "d7786f95-bd89-458f-bf28-e3e2a5f63cd8",
+      "blockId": "7a646d05-0d39-4c2a-a858-e70489863ea9",
+      "start": "2025-11-03T10:46:01.678Z",
+      "end": "2025-11-03T10:46:21.941Z",
+      "status": "completed",
+      "focusScore": "2"
+    },
+    {
+      "id": "9f9300ef-08f6-4d1f-a147-4bc6dc65831d",
+      "userId": "604a17f6-f85f-45a9-aea3-992a7c31e603",
+      "blockId": "e6772c80-70b3-4266-acae-1df7ba44b56a",
+      "start": "2025-11-03T11:21:50.752Z",
+      "end": "2025-11-03T11:22:07.470Z",
+      "status": "completed",
+      "focusScore": "1"
+    }
+  ]
+}
